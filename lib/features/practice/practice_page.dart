@@ -118,6 +118,19 @@ class _PracticePageState extends State<PracticePage> {
       return;
     }
 
+    if (state.hearts <= 0) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            state.nextHeartCountdown.isEmpty
+                ? 'No hearts left. Come back soon.'
+                : 'No hearts left. Next heart in ${state.nextHeartCountdown}.',
+          ),
+        ),
+      );
+      return;
+    }
+
     setState(() {
       _grading = true;
       _feedback = null;
@@ -129,6 +142,19 @@ class _PracticePageState extends State<PracticePage> {
     );
 
     if (!mounted) return;
+
+    final gradingUnavailable = fb.score == 0 &&
+        fb.improvedAnswer.trim().isEmpty &&
+        (fb.feedback.startsWith('Could not reach') ||
+            fb.feedback.startsWith('Practice grading failed'));
+
+    if (gradingUnavailable) {
+      setState(() {
+        _feedback = fb;
+        _grading = false;
+      });
+      return;
+    }
 
     int xpEarned = 0;
     if (fb.score >= 85) {
@@ -169,7 +195,7 @@ class _PracticePageState extends State<PracticePage> {
 
     if (fb.score < 65) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Low score this round — 1 heart used')),
+        const SnackBar(content: Text('Low score this round - 1 heart used')),
       );
     }
   }
@@ -335,7 +361,7 @@ class _PracticeHero extends StatelessWidget {
               _HeroChip(label: 'Streak', value: '$streak'),
               _HeroChip(
                 label: 'Hearts',
-                value: showCountdown ? '$hearts • $countdown' : '$hearts',
+                value: showCountdown ? '$hearts - $countdown' : '$hearts',
               ),
             ],
           ),

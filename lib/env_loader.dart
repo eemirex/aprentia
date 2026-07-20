@@ -8,6 +8,9 @@ class EnvLoader {
   }
 
   static String? get(String key) {
+    final fromDefine = _fromDartDefine(key);
+    if (fromDefine != null) return fromDefine;
+
     try {
       final v = dotenv.dotenv.env[key];
       if (v == null) return null;
@@ -16,5 +19,21 @@ class EnvLoader {
     } catch (_) {
       return null;
     }
+  }
+
+  static String? _fromDartDefine(String key) {
+    const supabaseUrl = String.fromEnvironment('SUPABASE_URL');
+    const supabaseAnonKey = String.fromEnvironment('SUPABASE_ANON_KEY');
+    const practiceApiUrl = String.fromEnvironment('PRACTICE_API_URL');
+
+    final value = switch (key) {
+      'SUPABASE_URL' => supabaseUrl,
+      'SUPABASE_ANON_KEY' => supabaseAnonKey,
+      'PRACTICE_API_URL' => practiceApiUrl,
+      _ => '',
+    };
+
+    final trimmed = value.trim();
+    return trimmed.isEmpty ? null : trimmed;
   }
 }

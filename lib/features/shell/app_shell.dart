@@ -17,7 +17,7 @@ import '../profile/profile_page.dart';
 import '../practice/practice_models.dart';
 
 class AppState extends ChangeNotifier {
-  late final AuthService _auth;
+  late AuthService _auth;
 
   AppState() {
     _auth = _isSupabaseReady() ? SupabaseAuthService() : LocalAuthService();
@@ -29,6 +29,16 @@ class AppState extends ChangeNotifier {
       return true;
     } catch (_) {
       return false;
+    }
+  }
+
+  Future<AppUser> _loadAuthUser() async {
+    try {
+      return await _auth.currentUser() ?? await _auth.signInAnonymously();
+    } catch (_) {
+      if (_auth is! SupabaseAuthService) rethrow;
+      _auth = LocalAuthService();
+      return await _auth.currentUser() ?? await _auth.signInAnonymously();
     }
   }
 
@@ -142,7 +152,7 @@ class AppState extends ChangeNotifier {
   Future<void> load() async {
     final prefs = await SharedPreferences.getInstance();
 
-    final authUser = await _auth.currentUser() ?? await _auth.signInAnonymously();
+    final authUser = await _loadAuthUser();
     userId = authUser.id;
     _isAnonymous = authUser.isAnonymous;
     _email = authUser.email;

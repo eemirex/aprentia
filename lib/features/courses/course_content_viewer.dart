@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -60,13 +59,24 @@ class _CourseContentViewerState extends State<CourseContentViewer> {
         return const Color(0xFF8B5CF6);
       case 'sv_m1_l1':
         return const Color(0xFF06B6D4);
+      case 'em_m1_l1':
+      case 'em_m1_l2':
+        return const Color(0xFFF59E0B);
+      case 'sb_m1_l1':
+        return const Color(0xFF10B981);
+      case 'rw_m1_l1':
+        return const Color(0xFFEC4899);
+      case 'cp_m1_l1':
+        return const Color(0xFFEF4444);
+      case 'ca_m1_l1':
+        return const Color(0xFF3B82F6);
       default:
         return const Color(0xFF8B5CF6);
     }
   }
 
   Future<void> _openVideo(BuildContext context) async {
-    final url = widget.lesson.videoUrl?.trim() ?? '';
+    final url = widget.lesson.videoUrl.trim();
     if (url.isEmpty) return;
 
     final uri = Uri.tryParse(url);
@@ -218,7 +228,7 @@ class _CourseContentViewerState extends State<CourseContentViewer> {
       if (_page == 0) {
         return _LessonIntroCard(
           accent: _accent,
-          emoji: '🎬',
+          icon: Icons.play_circle_fill_rounded,
           title: widget.lesson.title,
           subtitle: widget.lesson.subtitle,
           kicker: widget.courseTitle,
@@ -229,7 +239,7 @@ class _CourseContentViewerState extends State<CourseContentViewer> {
 
       return _WatchLessonCard(
         accent: _accent,
-        url: widget.lesson.videoUrl ?? '',
+        url: widget.lesson.videoUrl,
         onOpen: () => _openVideo(context),
       );
     }
@@ -238,7 +248,7 @@ class _CourseContentViewerState extends State<CourseContentViewer> {
       if (_page == 0) {
         return _LessonIntroCard(
           accent: _accent,
-          emoji: '🤖',
+          icon: Icons.auto_awesome,
           title: widget.lesson.title,
           subtitle: widget.lesson.subtitle,
           kicker: widget.courseTitle,
@@ -277,7 +287,7 @@ class _CourseContentViewerState extends State<CourseContentViewer> {
       if (_page == 0) {
         return _LessonIntroCard(
           accent: _accent,
-          emoji: '🧠',
+          icon: Icons.verified_user,
           title: widget.lesson.title,
           subtitle: widget.lesson.subtitle,
           kicker: widget.courseTitle,
@@ -289,7 +299,7 @@ class _CourseContentViewerState extends State<CourseContentViewer> {
       if (_page == 1) {
         return _MarkdownLessonCard(
           accent: _accent,
-          markdown: widget.lesson.markdown ?? '',
+          markdown: widget.lesson.markdown,
         );
       }
 
@@ -303,7 +313,7 @@ class _CourseContentViewerState extends State<CourseContentViewer> {
     if (_page == 0) {
       return _LessonIntroCard(
         accent: _accent,
-        emoji: '📘',
+        icon: Icons.menu_book,
         title: widget.lesson.title,
         subtitle: widget.lesson.subtitle,
         kicker: widget.courseTitle,
@@ -313,7 +323,7 @@ class _CourseContentViewerState extends State<CourseContentViewer> {
 
     return _MarkdownLessonCard(
       accent: _accent,
-      markdown: widget.lesson.markdown ?? '',
+      markdown: widget.lesson.markdown,
     );
   }
 
@@ -429,7 +439,7 @@ class _CourseContentViewerState extends State<CourseContentViewer> {
 
 class _LessonIntroCard extends StatelessWidget {
   final Color accent;
-  final String emoji;
+  final IconData icon;
   final String title;
   final String subtitle;
   final String kicker;
@@ -437,7 +447,7 @@ class _LessonIntroCard extends StatelessWidget {
 
   const _LessonIntroCard({
     required this.accent,
-    required this.emoji,
+    required this.icon,
     required this.title,
     required this.subtitle,
     required this.kicker,
@@ -469,10 +479,7 @@ class _LessonIntroCard extends StatelessWidget {
               color: accent.withValues(alpha: 0.12),
             ),
             child: Center(
-              child: Text(
-                emoji,
-                style: const TextStyle(fontSize: 38),
-              ),
+              child: Icon(icon, color: accent, size: 42),
             ),
           ),
           const SizedBox(height: 18),
@@ -1019,7 +1026,7 @@ class _WordPuzzleCard extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           Text(
-            puzzle.currentWord.isEmpty ? 'Current: —' : 'Current: ${puzzle.currentWord}',
+            puzzle.currentWord.isEmpty ? 'Current: -' : 'Current: ${puzzle.currentWord}',
             style: TextStyle(
               fontWeight: FontWeight.w800,
               color: Theme.of(context).textTheme.bodySmall?.color,
