@@ -15,7 +15,7 @@ class CoursesPage extends StatelessWidget {
         modules: const [
           CourseModule(
             id: 'pf_m1',
-            title: 'Module 1 — The Prompt Recipe',
+            title: 'Module 1 - The Prompt Recipe',
             subtitle: 'Goal + Context + Constraints + Format',
             lessons: [
               CourseLesson(
@@ -42,10 +42,27 @@ A strong prompt usually contains:
               ),
               CourseLesson(
                 id: 'pf_m1_l2',
-                kind: CourseLessonKind.watch,
-                title: 'Lesson 2: Watch a walkthrough',
-                subtitle: 'See the prompt structure used live.',
-                videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+                kind: CourseLessonKind.read,
+                title: 'Lesson 2: Improve a weak prompt',
+                subtitle: 'Turn a vague request into a useful brief.',
+                markdown: '''
+# Improve a weak prompt
+
+Start with a vague request:
+
+> Write a launch email.
+
+Add the missing ingredients:
+
+- **Goal:** announce the product launch
+- **Context:** existing customers already know the brand
+- **Constraints:** warm tone, fewer than 120 words
+- **Format:** subject line, short body, one call to action
+
+## Practice habit
+
+Before sending a prompt, check whether another person could produce the result from the same instructions. If not, add the missing context or constraint.
+''',
               ),
             ],
           ),
@@ -58,7 +75,7 @@ A strong prompt usually contains:
         modules: const [
           CourseModule(
             id: 'sv_m1',
-            title: 'Module 1 — Safe Answering',
+            title: 'Module 1 - Safe Answering',
             subtitle: 'Assumptions, sources, uncertainty',
             lessons: [
               CourseLesson(
@@ -89,7 +106,7 @@ Your answers become trustworthy, repeatable, and client-safe.
         modules: const [
           CourseModule(
             id: 'em_m1',
-            title: 'Module 1 — Better Business Emails',
+            title: 'Module 1 - Better Business Emails',
             subtitle: 'Tone, brevity, CTA',
             lessons: [
               CourseLesson(
@@ -112,10 +129,22 @@ Write a renewal reminder email for a current customer in a direct but warm tone 
               ),
               CourseLesson(
                 id: 'em_m1_l2',
-                kind: CourseLessonKind.watch,
-                title: 'Email transformation demo',
-                subtitle: 'See a weak email turned into a strong one.',
-                videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+                kind: CourseLessonKind.read,
+                title: 'Transform a weak email request',
+                subtitle: 'Compare an underspecified prompt with a strong one.',
+                markdown: '''
+# Transform an email request
+
+**Weak prompt**
+
+> Write an email asking for the report.
+
+**Stronger prompt**
+
+> Write a concise follow-up email to a project partner who missed yesterday's report deadline. Use a calm, professional tone, ask for the report by 2 PM today, and include one sentence offering help. Keep it under 100 words.
+
+The stronger version defines the relationship, situation, deadline, tone, helpful next step, and length.
+''',
               ),
             ],
           ),
@@ -128,7 +157,7 @@ Write a renewal reminder email for a current customer in a direct but warm tone 
         modules: const [
           CourseModule(
             id: 'sb_m1',
-            title: 'Module 1 — Structured Summaries',
+            title: 'Module 1 - Structured Summaries',
             subtitle: 'Bullets, takeaways, next steps',
             lessons: [
               CourseLesson(
@@ -160,7 +189,7 @@ Summarize this report in 5 bullets for a manager and add 3 action points.
         modules: const [
           CourseModule(
             id: 'rw_m1',
-            title: 'Module 1 — Research in steps',
+            title: 'Module 1 - Research in steps',
             subtitle: 'Scope, sources, synthesis',
             lessons: [
               CourseLesson(
@@ -191,7 +220,7 @@ This produces cleaner, more trustworthy work.
         modules: const [
           CourseModule(
             id: 'cp_m1',
-            title: 'Module 1 — Idea generation',
+            title: 'Module 1 - Idea generation',
             subtitle: 'Variation, constraints, surprise',
             lessons: [
               CourseLesson(
@@ -223,7 +252,7 @@ Give me 10 campaign ideas: 3 bold, 3 emotional, 4 practical.
         modules: const [
           CourseModule(
             id: 'ca_m1',
-            title: 'Module 1 — Work smarter',
+            title: 'Module 1 - Work smarter',
             subtitle: 'Meetings, reports, planning',
             lessons: [
               CourseLesson(
@@ -431,24 +460,24 @@ class _CourseCard extends StatelessWidget {
     }
   }
 
-  String _emojiForCourse() {
+  IconData _iconForCourse() {
     switch (course.id) {
       case 'prompting_foundations':
-        return '✨';
+        return Icons.auto_awesome;
       case 'safety_verification':
-        return '🛡️';
+        return Icons.verified_user;
       case 'email_mastery':
-        return '📧';
+        return Icons.mail;
       case 'summaries_briefs':
-        return '📝';
+        return Icons.summarize;
       case 'research_workflows':
-        return '🔎';
+        return Icons.manage_search;
       case 'creative_prompting':
-        return '🎨';
+        return Icons.palette;
       case 'career_ai':
-        return '🚀';
+        return Icons.rocket_launch;
       default:
-        return '📘';
+        return Icons.menu_book;
     }
   }
 
@@ -499,10 +528,7 @@ class _CourseCard extends StatelessWidget {
                     color: accent.withValues(alpha: 0.14),
                   ),
                   child: Center(
-                    child: Text(
-                      _emojiForCourse(),
-                      style: const TextStyle(fontSize: 28),
-                    ),
+                    child: Icon(_iconForCourse(), color: accent, size: 30),
                   ),
                 ),
                 const SizedBox(width: 14),

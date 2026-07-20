@@ -13,19 +13,39 @@ class CourseDetailPage extends StatelessWidget {
         return const Color(0xFF8B5CF6);
       case 'safety_verification':
         return const Color(0xFF06B6D4);
+      case 'email_mastery':
+        return const Color(0xFFF59E0B);
+      case 'summaries_briefs':
+        return const Color(0xFF10B981);
+      case 'research_workflows':
+        return const Color(0xFFEC4899);
+      case 'creative_prompting':
+        return const Color(0xFFEF4444);
+      case 'career_ai':
+        return const Color(0xFF3B82F6);
       default:
         return const Color(0xFF8B5CF6);
     }
   }
 
-  String _emojiForCourse() {
+  IconData _iconForCourse() {
     switch (course.id) {
       case 'prompting_foundations':
-        return '🤖';
+        return Icons.auto_awesome;
       case 'safety_verification':
-        return '🧠';
+        return Icons.verified_user;
+      case 'email_mastery':
+        return Icons.mail;
+      case 'summaries_briefs':
+        return Icons.summarize;
+      case 'research_workflows':
+        return Icons.manage_search;
+      case 'creative_prompting':
+        return Icons.palette;
+      case 'career_ai':
+        return Icons.rocket_launch;
       default:
-        return '📘';
+        return Icons.menu_book;
     }
   }
 
@@ -81,10 +101,7 @@ class CourseDetailPage extends StatelessWidget {
                     border: Border.all(color: Colors.white.withValues(alpha: 0.24)),
                   ),
                   child: Center(
-                    child: Text(
-                      _emojiForCourse(),
-                      style: const TextStyle(fontSize: 30),
-                    ),
+                    child: Icon(_iconForCourse(), color: Colors.white, size: 34),
                   ),
                 ),
                 const SizedBox(width: 14),
@@ -112,7 +129,7 @@ class CourseDetailPage extends StatelessWidget {
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        '$doneCount / $total lessons • ${(progress * 100).round()}%',
+                        '$doneCount / $total lessons - ${(progress * 100).round()}%',
                         style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w900,

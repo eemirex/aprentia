@@ -325,7 +325,7 @@ class _TopSummaryCard extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            '$unlockedCount / $total badges • $pct%',
+            '$unlockedCount / $total badges - $pct%',
             style: TextStyle(
               fontWeight: FontWeight.w800,
               color: Theme.of(context).textTheme.bodySmall?.color,

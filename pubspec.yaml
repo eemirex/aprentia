@@ -1,5 +1,5 @@
-name: aprentia_v2
-description: "A new Flutter project."
+name: aprentia
+description: "Aprentia, a playful AI prompting practice app."
 publish_to: 'none'
 
 version: 1.0.0+1
@@ -12,8 +12,6 @@ dependencies:
     sdk: flutter
   flutter_markdown: ^0.7.2
   url_launcher: ^6.3.0
-
-
   shared_preferences: ^2.2.3
   http: ^1.2.2
   flutter_dotenv: ^5.1.0
@@ -28,5 +26,6 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
+    - assets/practice_items.json
     - assets/images/
 

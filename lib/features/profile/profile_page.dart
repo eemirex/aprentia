@@ -158,7 +158,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   height: 46,
                   child: ElevatedButton(
                     onPressed: _saving ? null : _save,
-                    child: Text(_saving ? 'Saving…' : 'Save'),
+                    child: Text(_saving ? 'Saving...' : 'Save'),
                   ),
                 ),
               ],
@@ -181,7 +181,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 const SizedBox(height: 6),
                 _RowLine(
                   label: 'Email',
-                  value: state.email.isEmpty ? '—' : state.email,
+                  value: state.email.isEmpty ? '-' : state.email,
                 ),
                 const SizedBox(height: 12),
 

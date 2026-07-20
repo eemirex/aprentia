@@ -1,0 +1,29 @@
+[
+  {
+    "id": "rewrite_email",
+    "title": "Rewrite an email",
+    "prompt": "Rewrite this email to be clearer and shorter: \"Hello Sir, I am writing to inform you that I need the report as soon as possible because the client has asked me many times and I do not know what to tell them.\"",
+    "rubric": "Score higher for a concise message, a respectful tone, specific context, and a clear next step.",
+    "difficulty": "Easy",
+    "tags": ["writing", "clarity"],
+    "tip": "State the goal first, then add only the context the reader needs."
+  },
+  {
+    "id": "structured_summary",
+    "title": "Summarize with format",
+    "prompt": "Write a prompt that asks an AI assistant to summarize a long meeting transcript into 5 bullets, 3 decisions, and 3 follow-up tasks.",
+    "rubric": "Score higher for a fixed output format, clear labels, useful constraints, and an audience-aware summary.",
+    "difficulty": "Medium",
+    "tags": ["summary", "format"],
+    "tip": "Name each section you want in the final answer."
+  },
+  {
+    "id": "verify_claims",
+    "title": "Ask for verification",
+    "prompt": "Create a prompt that asks an AI assistant to answer a research question while clearly separating facts, assumptions, and items that need verification.",
+    "rubric": "Score higher for source expectations, uncertainty handling, and an explicit verification checklist.",
+    "difficulty": "Hard",
+    "tags": ["research", "safety"],
+    "tip": "Tell the model how to handle uncertainty before it answers."
+  }
+]

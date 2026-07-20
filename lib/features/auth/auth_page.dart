@@ -133,7 +133,7 @@ class _AuthPageState extends State<AuthPage> {
             height: 46,
             child: OutlinedButton(
               onPressed: (_sending || !state.emailOtpSupported) ? null : _sendOtp,
-              child: Text(_sending ? 'Sending…' : 'Send OTP'),
+              child: Text(_sending ? 'Sending...' : 'Send OTP'),
             ),
           ),
 
@@ -152,8 +152,8 @@ class _AuthPageState extends State<AuthPage> {
             width: double.infinity,
             height: 46,
             child: ElevatedButton(
-              onPressed: _verifying ? null : _verify,
-              child: Text(_verifying ? 'Verifying…' : 'Verify & sign in'),
+              onPressed: (_verifying || !state.emailOtpSupported) ? null : _verify,
+              child: Text(_verifying ? 'Verifying...' : 'Verify & sign in'),
             ),
           ),
 

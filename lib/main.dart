@@ -1,11 +1,29 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
+import 'env_loader.dart';
 import 'features/shell/app_shell.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await EnvLoader.loadDotEnvIfPresent();
+  await _initSupabaseIfConfigured();
+
   runApp(const AppRoot());
+}
+
+Future<void> _initSupabaseIfConfigured() async {
+  final url = EnvLoader.get('SUPABASE_URL');
+  final anonKey = EnvLoader.get('SUPABASE_ANON_KEY');
+
+  if (url == null || anonKey == null) return;
+
+  await Supabase.initialize(
+    url: url,
+    anonKey: anonKey,
+  );
 }
 
 class AppRoot extends StatelessWidget {
